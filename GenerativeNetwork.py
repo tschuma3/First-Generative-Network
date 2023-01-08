@@ -3,7 +3,6 @@ Help from
 -- https://anderfernandez.com/en/blog/how-to-code-gan-in-python/
 """
 
-
 import keras
 import tensorflow as tf
 from keras.layers import Dense, Conv2DTranspose, LeakyReLU, Reshape, BatchNormalization, Activation, Conv2D, Flatten, Dropout
