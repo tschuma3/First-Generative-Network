@@ -16,7 +16,6 @@ Tips for Generative Adversarial Network
     -- If the session ends then the program can load the last trained model avoiding to retrain from scratch
 """
 
-
 import keras
 import tensorflow as tf
 from keras.layers import Dense, Conv2DTranspose, LeakyReLU, Reshape, BatchNormalization, Activation, Conv2D, Flatten, Dropout
