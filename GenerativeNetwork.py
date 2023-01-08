@@ -19,6 +19,21 @@ from datetime import datetime
 
 #region Generate Images
 
+"""
+-- This network generates images
+-- In the beginning the network will only generate noise 
+
+Coding the Generative Network
+-- Dense: The noise layer of the generator
+-- Conv2DTranspose: Enables convolve to upscale and convolve the image at the same time
+    -- Similar to using the function UpSampling2D followed by Conv2D
+-- LeakyReLU: Better than ReLU function as it avoids gradient vanish
+-- BatchNormalization: Enables the normalization of the results of a convolution
+    -- Allows for better results in some cases
+Reshape: Enables the transformation of a one-dimensional vector into a three-dimensional array
+"""
+
+
 def generate_Images():
     generator = Sequential()
 
@@ -51,6 +66,12 @@ model_Generator.summary()
 
 #region Draw the GAN
 
+"""
+-- At this point in the code it will generate random images as it is not yet trained
+-- Will only generate noise
+"""
+
+
 def generate_Input_Data(n_Samples):
     X = np.random.randn(100 * n_Samples)
     X =X.reshape(n_Samples, 100)
@@ -74,6 +95,15 @@ for i in range(samples):
 #endregion
 
 #region Discriminator Network
+
+"""
+-- This network classifies whether an image is real or not
+-- This is the network that will enable the generative network to be trained
+-- Takes an image input and outputs a binary value
+-- Dropout during each convolution helps avoid overfitting
+-- The sigmoid activation function helps determine the probibility of an image being in the target group
+"""
+
 
 def discriminator_Images():
 
@@ -111,6 +141,14 @@ model_Discriminator.summary()
 
 #region Load Data from Cifar10
 
+"""
+-- This is a dataset of 50000 32 X 32 images used to train ai
+-- Want to normalize the data, which allows the model to work faster
+    -- The RGB layer goes from 0 to 255
+    -- Both subtract and divide by 127.5 allowing the data to go from -1 to 1
+"""
+
+
 def carry_Images():
     (Xtrain, Ytrain), (_,_) = cifar10.load_data()
 
@@ -129,6 +167,13 @@ print(carry_Images().shape)
 
 #region Training
 
+"""
+-- Creates a function that generates both real and fake images
+-- Generate fake images with similar size to the real ones, 32 X 32 X 3
+-- Give a label of 0 to the fake images to better improve performance
+"""
+
+
 def carry_Data_Real(dataset, n_Samples):
     ix = np.random.randint(0, dataset.shape[0], n_Samples)
     X = dataset[ix]
@@ -141,6 +186,13 @@ def carry_Data_Fake(n_Samples):
     X = X.reshape((n_Samples, 32, 32, 3))
     y = np.zeros((n_Samples, 1))
     return X, y
+
+"""
+-- It is important to pre-train the discriminator because when training the GAN, it will only train the generator
+-- To see if the discriminator has been trained correctly, it iwill check the accuracy of the real and fake data
+-- To train it, passing half of the real data and half of the fake data
+    -- Hence it calculates the mid batch
+"""
 
 def train_Discriminator(model, dataset, n_Iterations=20, batch=128):
     
@@ -163,6 +215,12 @@ train_Discriminator(model_Discriminator, dataset)
 
 #region The Generative Adversarial Network
 
+"""
+-- Will connect the generator network and discriminator netowrk
+-- The trainable parameter will be set to false because the discriminator is already trained
+-- The cost function will be 'binary_crossentropy', as it will help classify between fake (0) and real (1) images
+"""
+
 def create_GAN(discriminator, generator):
     discriminator.trainable=False
     gan = Sequential()
@@ -180,6 +238,15 @@ gan.summary()
 #endregion
 
 #region Model Evaluation and Image Generation
+
+"""
+-- Able to see the weights and the images generated, showing the improvement
+-- Starts with saving 10 of the results
+-- Saves the model as it gets trained
+-- Generate new data to evaluate the model
+    -- It is better to train with new data then with the ones just trained with
+"""
+
 
 def show_Images_Generator(data_Fake, epoch):
 
