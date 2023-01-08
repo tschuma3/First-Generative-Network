@@ -3,10 +3,24 @@ Help from
 -- https://anderfernandez.com/en/blog/how-to-code-gan-in-python/
 """
 
+"""
+Tips for Generative Adversarial Network
+1. Generate one type of image 
+    -- At the beginning try and generate one thing, e.g. dogs, planes, faces
+2. Fail quick and improve
+    -- Letting the model train for 20 to 30 epochs instead of 100 to 200
+3. Identfy the metric to evaluate your model
+    -- Normal neural network have quite clear indicators when visualizing
+    -- In this case the program focuses on accuracy 
+4. If the session ends...load your model
+    -- If the session ends then the program can load the last trained model avoiding to retrain from scratch
+"""
+
+
 import keras
 import tensorflow as tf
 from keras.layers import Dense, Conv2DTranspose, LeakyReLU, Reshape, BatchNormalization, Activation, Conv2D, Flatten, Dropout
-from keras.models import Model, Sequential
+from keras.models import Model, Sequential, load_model
 from keras.optimizers import Adam
 from keras.datasets import cifar10
 import matplotlib.pyplot as plt
@@ -15,6 +29,12 @@ import numpy as np
 import random
 import pandas as pd
 from datetime import datetime
+
+#region Load the Last Saved Model
+
+model_Generator = load_model('First Run\9_20230107_170548_model_generator_.h5')
+
+#endregion
 
 #region Generate Images
 
