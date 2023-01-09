@@ -46,7 +46,7 @@ Libraries
 
 #region Load the Last Saved Model
 
-model_Generator = load_model('D:\GitHub Repos\First-Generative-Network\Second Run\129_20230108_220337_model_generator_.h5')
+model_Generator = load_model('D:\GitHub Repos\First-Generative-Network\129_20230108_220337_model_generator_.h5')
 
 #endregion
 
