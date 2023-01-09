@@ -186,10 +186,10 @@ def carry_Images():
 
     #Change this to another dataset to train the model with a different dataset
     #Other possible datasets: https://archive.ics.uci.edu/ml/index.php
-    (Xtrain, Ytrain), (_,_) = cifar10.load_data() # <----
+    (Xtrain, Ytrain), (_,_) = cifar10.load_data() #<---- cifar10 to switch what dataset the model trains with
 
     #This allows to change what the model imitates
-    indice = np.where(Ytrain == 0) #<---- 0 to switch what image the model
+    indice = np.where(Ytrain == 0) #<---- 0 to switch what image the model trains with
 
     indice = indice[0]
     Xtrain = Xtrain[indice, :, :, :]
