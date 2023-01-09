@@ -29,6 +29,21 @@ import random
 import pandas as pd
 from datetime import datetime
 
+"""
+Libraries
+    -- Keras
+        -- https://keras.io/
+            -- Conv2DTranspose
+                -- https://keras.io/api/layers/convolution_layers/convolution2d_transpose/
+            -- Conv2D
+                -- https://www.geeksforgeeks.org/keras-conv2d-class/
+            -- Dense
+                -- https://keras.io/api/layers/core_layers/dense/
+            -- LeakyReLU
+                -- https://keras.io/api/layers/activation_layers/leaky_relu/
+"""
+
+
 #region Load the Last Saved Model
 
 model_Generator = load_model('First Run\9_20230107_170548_model_generator_.h5')
@@ -168,7 +183,10 @@ model_Discriminator.summary()
 
 
 def carry_Images():
-    (Xtrain, Ytrain), (_,_) = cifar10.load_data()
+
+    #Change this to another dataset to train the model with a different dataset
+    #Other possible datasets: https://archive.ics.uci.edu/ml/index.php
+    (Xtrain, Ytrain), (_,_) = cifar10.load_data() # <----
 
     indice = np.where(Ytrain == 0)
     indice = indice[0]
