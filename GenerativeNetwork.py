@@ -164,6 +164,7 @@ def discriminator_Images():
 
     opt = Adam(learning_rate=0.0002, beta_1=0.5)
     discriminator.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
+    #Loss and binary cross entropy ---> https://towardsdatascience.com/understanding-binary-cross-entropy-log-loss-a-visual-explanation-a3ac6025181a
 
     return discriminator
 
