@@ -46,7 +46,7 @@ Libraries
 
 #region Load the Last Saved Model
 
-model_Generator = load_model('First Run\9_20230107_170548_model_generator_.h5')
+model_Generator = load_model('D:\GitHub Repos\First-Generative-Network\9_20230107_170548_model_generator_.h5')
 
 #endregion
 
@@ -188,7 +188,9 @@ def carry_Images():
     #Other possible datasets: https://archive.ics.uci.edu/ml/index.php
     (Xtrain, Ytrain), (_,_) = cifar10.load_data() # <----
 
-    indice = np.where(Ytrain == 0)
+    #This allows to change what the model imitates
+    indice = np.where(Ytrain == 0) #<---- 0 to switch what image the model
+
     indice = indice[0]
     Xtrain = Xtrain[indice, :, :, :]
 
